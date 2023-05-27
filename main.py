@@ -15,4 +15,4 @@ if get_started_button:
     getyourguide_trips = get_getyourguide_trips(web_links)
     output = json.dumps(getyourguide_trips, indent=5)
     st.write("Showing scraped trips: ")
-    st.write(output)
+    st.code(output, language='json')
