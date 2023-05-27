@@ -3,6 +3,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from webdriver_manager.firefox import GeckoDriverManager
+
+
+def get_firefox_driver(opts):
+    driver = webdriver.Firefox(
+        options=opts,
+        executable_path="/home/appuser/.conda/bin/geckodriver",
+    )
+    return driver
 
 
 def get_driver(opts):
@@ -13,10 +24,14 @@ OPTIONS = Options()
 OPTIONS.add_argument('--disable-gpu')
 OPTIONS.add_argument('--headless')
 
+FIREFOX_OPTIONS = FirefoxOptions()
+FIREFOX_OPTIONS.add_argument("--disable-gpu")
+FIREFOX_OPTIONS.add_argument("--headless")
+
 
 class ScrapeGetYourGuide:
     def __init__(self):
-        self.driver = get_driver(OPTIONS)
+        self.driver = get_firefox_driver(FIREFOX_OPTIONS)
 
     def get_response(self, url: str) -> list:
         # Got to the webpage
