@@ -11,6 +11,7 @@ def get_driver(opts):
 
 OPTIONS = Options()
 OPTIONS.add_argument('--disable-gpu')
+OPTIONS.add_argument('--headless')
 
 
 class ScrapeGetYourGuide:
