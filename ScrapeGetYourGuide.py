@@ -88,6 +88,15 @@ class ScrapeGetYourGuide:
                     single_trip["pricing_value"] = "Not found"
                     single_trip["pricing_category"] = "Not found"
 
+                # Get the href of the trip
+                try:
+                    trip_href = trip.find_element(By.CSS_SELECTOR, "a.vertical-activity-card__container")
+                    href_value = trip_href.get_attribute("href")
+                    single_trip["link"] = href_value
+                except Exception as e:
+                    print("The following exception occured: ", e)
+                    single_trip["link"] = "Not found"
+
                 # Add in success message
                 single_trip["message"] = "Success!"
                 single_trip["status"] = 200
