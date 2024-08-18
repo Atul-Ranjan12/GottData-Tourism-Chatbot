@@ -2,7 +2,7 @@ from langchain import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 
-from aux import validate_openai_key
+from validate import validate_openai_key
 
 
 def find_question_type(question: str) -> bool:
@@ -19,11 +19,11 @@ def find_question_type(question: str) -> bool:
         return False
 
     template = """
-        Given the text: 
+        Given the text:
         {question}
         Can you answer as "true" if the text is related to tourism, tours, or travels,
         else, answer as "false".
-        Your answer should only contain either the word "true" or "false" 
+        Your answer should only contain either the word "true" or "false"
     """
 
     prompt_template = PromptTemplate(input_variables=["question"], template=template)
@@ -53,7 +53,7 @@ def answer_non_travel_question(question: str) -> str:
         return ""
 
     template = """
-            Given the text: 
+            Given the text:
             {question}
             Please give out a suitable answer
         """
@@ -82,11 +82,11 @@ def get_destination(question: str) -> str:
         return ""
 
     template = """
-               Given the text: 
+               Given the text:
                {question}
                Can you read the text and find out if the text is curious about a certain destination he wants to tour?
-               Your answer should be of one word, and it should only contain the destination the user wants to go to. 
-               If the user is not talking about any destination, your answer should again be only one word and it should 
+               Your answer should be of one word, and it should only contain the destination the user wants to go to.
+               If the user is not talking about any destination, your answer should again be only one word and it should
                be "false__no_destination"
            """
 
@@ -118,10 +118,10 @@ def get_location_curiosity(destination: str, question: str) -> bool:
     template = """
                Given the destination {destination}
                and the question {question}
-               answer as "false" if the question asked represents wanting to travel 
+               answer as "false" if the question asked represents wanting to travel
                to that location. and answer as "true" if the question asked at the moment
                has no intent on travelling there at the moment.
-               Your answer should only contain the word "true" or "false" 
+               Your answer should only contain the word "true" or "false"
            """
 
     prompt_template = PromptTemplate(input_variables=["destination", "question"], template=template)
@@ -136,6 +136,3 @@ def get_location_curiosity(destination: str, question: str) -> bool:
         return True
     else:
         return False
-
-
-
